@@ -4,9 +4,9 @@ import 'dart:ui' as ui;
 class IconShadowWidget extends StatelessWidget {
   final Icon icon;
   final bool showShadow;
-  final Color shadowColor;
+  final Color? shadowColor;
 
-  IconShadowWidget(this.icon, {this.showShadow = true, this.shadowColor});
+  const IconShadowWidget(this.icon, {Key? key, this.showShadow = true, this.shadowColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class IconShadowWidget extends StatelessWidget {
     double dimens = 1.0;
     double dimens2 = 2.0;
     double dimens3 = 3.0;
-    Color _shadowColor = icon.color;
+    Color? _shadowColor = icon.color;
     if (shadowColor != null) {
       _shadowColor = shadowColor;
     }
-    List<Widget> list = new List();
+    List<Widget> list = [];
     if (showShadow) {
       list.addAll([
         Positioned(
@@ -202,11 +202,11 @@ class IconShadowWidget extends StatelessWidget {
 
     list.add(ClipRect(
         child: BackdropFilter(
-      filter: new ui.ImageFilter.blur(sigmaX: 0.9, sigmaY: 0.9),
-      child: IconTheme(data: IconThemeData(opacity: 1.0), child: icon),
+      filter: ui.ImageFilter.blur(sigmaX: 0.9, sigmaY: 0.9),
+      child: IconTheme(data: const IconThemeData(opacity: 1.0), child: icon),
     )));
 
-    list.add(IconTheme(data: IconThemeData(opacity: 1.0), child: icon));
+    list.add(IconTheme(data: const IconThemeData(opacity: 1.0), child: icon));
 
     return Stack(
       alignment: Alignment.center,
